@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>按鈕倍增器</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="button-container">
+        <button>點我</button>
+    </div>
+
+    <script>
+        const buttonContainer = document.getElementById('button-container');
+
+        const positionButtonRandomly = (button) => {
+            const buttonWidth = 100;
+            const buttonHeight = 40;
+            const top = Math.random() * (window.innerHeight - buttonHeight);
+            const left = Math.random() * (window.innerWidth - buttonWidth);
+            button.style.top = `${top}px`;
+            button.style.left = `${left}px`;
+        };
+
+        const doubleButtons = () => {
+            const currentButtonCount = buttonContainer.children.length;
+            for (let i = 0; i < currentButtonCount; i++) {
+                const newButton = document.createElement('button');
+                newButton.textContent = '點我';
+                positionButtonRandomly(newButton);
+                buttonContainer.appendChild(newButton);
+            }
+        };
+
+        positionButtonRandomly(buttonContainer.querySelector('button'));
+
+        buttonContainer.addEventListener('click', (event) => {
+            if (event.target.tagName === 'BUTTON') {
+                doubleButtons();
+            }
+        });
+    </script>
+
+</body>
+</html>
